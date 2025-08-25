@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<<<<<<< HEAD
+  <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
+=======
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <base href="/">
+>>>>>>> 4def62d5b274cd594b8c55b9be31ca2dd113cea5
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <!-- <base href="/"> -->
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="student_hq">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>Student HQ</title>
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Professional Loading Screen Styles - Matching Landing Page Theme -->
+  <style>
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    }
+
+    .brand-title {
+      font-size: 42px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 3px;
+      text-align: center;
+      margin: 0 0 20px 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .tagline {
+      font-size: 22px;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      font-weight: 300;
+      margin-bottom: 60px;
+      line-height: 1.4;
+    }
+
+    .static-text {
+      display: inline;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .animated-text {
+      display: inline;
+      font-weight: 500;
+      min-width: 100px;
+      color: #ffffff;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    /* Professional loading indicator matching theme */
+    .loading-indicator {
+      width: 60px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loading-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 50%, #ffffff 100%);
+      border-radius: 2px;
+      animation: loadingProgress 2s ease-in-out infinite;
+    }
+
+    @keyframes loadingProgress {
+      0% {
+        width: 0%;
+        margin-left: 0%;
+      }
+      50% {
+        width: 75%;
+        margin-left: 12.5%;
+      }
+      100% {
+        width: 0%;
+        margin-left: 100%;
+      }
+    }
+
+    /* Fade out animation */
+    .loading.fade-out {
+      animation: fadeOut 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+      100% { 
+        opacity: 0; 
+        transform: scale(0.95);
+        display: none; 
+      }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .brand-title {
+        font-size: 32px;
+        letter-spacing: 2px;
+        margin: 0 20px 15px 20px;
+      }
+      
+      .tagline {
+        font-size: 18px;
+        margin-bottom: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-title {
+        font-size: 26px;
+        letter-spacing: 1.5px;
+        margin: 0 15px 15px 15px;
+      }
+      
+      .tagline {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Professional Loading Screen -->
+  <div id="loading" class="loading">
+    <h1 class="brand-title">STUDENT HQ</h1>
+    
+    <div class="tagline">
+      <span class="static-text">Find your perfect </span>
+      <span id="animatedText" class="animated-text">courses</span>
+    </div>
+    
+    <div class="loading-indicator">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript for text animation and Flutter loading -->
+  <script>
+    // Animated text rotation - only the 3 words you specified
+    const words = ['courses', 'institution', 'career'];
+    let currentWordIndex = 0;
+    const animatedTextElement = document.getElementById('animatedText');
+
+    function changeWord() {
+      animatedTextElement.style.opacity = '0';
+      
+      setTimeout(() => {
+        currentWordIndex = (currentWordIndex + 1) % words.length;
+        animatedTextElement.textContent = words[currentWordIndex];
+        animatedTextElement.style.opacity = '1';
+      }, 200);
+    }
+
+    // Start text animation
+    const textInterval = setInterval(changeWord, 2500);
+
+    // Remove loading screen when Flutter is ready
+    window.addEventListener('flutter-first-frame', function () {
+      clearInterval(textInterval);
+      const loadingElement = document.getElementById('loading');
+      if (loadingElement) {
+        loadingElement.classList.add('fade-out');
+        setTimeout(() => {
+          loadingElement.style.display = 'none';
+        }, 600);
+      }
+    });
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+  <script id="rzp-jssdk" src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+  <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
+</body>
+</html>
